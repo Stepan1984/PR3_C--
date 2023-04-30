@@ -3,20 +3,20 @@ using namespace std;
 template <class Tdata, class Tnumber>
 Tnumber find_odd_max(Tdata * array)
 {
-    Tnumber max, * cur = array.begin(); // ÑƒÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÐ¼ ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»ÑŒ Ð½Ð° 1 ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ Ð¾Ñ‡ÐµÑ€ÐµÐ´Ð¸
+    Tnumber max, * cur = array.begin(); // óñòàíàâëèâàåì óêàçàòåëü íà 1 ýëåìåíò î÷åðåäè
     while(cur)
     {
-        if(cur.data & 1) // ÐµÑÐ»Ð¸ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ Ð½ÐµÑ‡Ñ‘Ñ‚Ð½Ñ‹Ð¹
+        if(cur.data & 1) // åñëè ýëåìåíò íå÷¸òíûé
         {
-            max = cur.data; // Ð·Ð°Ð¿Ð¸ÑÑ‹Ð²Ð°ÐµÐ¼ ÐµÐ³Ð¾ Ð² max
+            max = cur.data; // çàïèñûâàåì åãî â max
             break;
         }
         cur = cur->next; 
     }
-    while(cur) // Ð¿Ð¾ÐºÐ° Ð² Ð¾Ñ‡ÐµÑ€ÐµÐ´Ð¸ ÐµÑÑ‚ÑŒ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ñ‹
+    while(cur) // ïîêà â î÷åðåäè åñòü ýëåìåíòû
     {
-        if(cur.data & 1) // ÐµÑÐ»Ð¸ Ð½ÐµÑ‡Ñ‘Ñ‚Ð½Ð¾Ðµ
-            if(cur.data > max) // ÐµÑÐ»Ð¸ Ð±Ð¾Ð»ÑŒÑˆÐµ Ð½Ñ‹Ð½ÐµÑˆÐ½ÐµÐ³Ð¾ Ð¼Ð°ÐºÑÐ¸Ð¼ÑƒÐ¼Ð°
+        if(cur.data & 1) // åñëè íå÷¸òíîå
+            if(cur.data > max) // åñëè áîëüøå íûíåøíåãî ìàêñèìóìà
                 max = cur.data; 
         cur = cur->next;
     }
