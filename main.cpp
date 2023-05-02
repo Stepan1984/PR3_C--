@@ -1,11 +1,12 @@
 #include "template_classes.h"
 #include <iostream>
 #include <locale.h>
+#include <sstream>
 
 using namespace std;
 
 template <class TQueue, class TData>
-void add(TQueue &, TData &);
+void input(TQueue &queue, TData &value, bool );
 
 int main(void)
 {
@@ -33,10 +34,10 @@ int main(void)
         switch (menu)
         {
             case 1:
-                add(d_vector_queue, dtmp);
-                add(u_vector_queue, utmp);
-                add(d_list_queue, dtmp);
-                add(u_list_queue, dtmp);                
+                input(d_vector_queue, dtmp, 1);
+                input(u_vector_queue, utmp, 0);
+                input(d_list_queue, dtmp, 1);
+                input(u_list_queue, dtmp, 0);                
                 break;
             case 2:
                 cout << "Извлекли из dVQ: " << d_vector_queue.DeQueue() << endl;
@@ -72,8 +73,9 @@ int main(void)
     return 0;
 }
 
+//template<class T>
 template <class TQueue, class TData>
-void add(TQueue &queue, TData &value)
+void input(TQueue &queue, TData &value, bool data_type)
 {
     if(queue.isFull())
     {
@@ -81,7 +83,41 @@ void add(TQueue &queue, TData &value)
         while(cin.get() != '\n');
         return;
     }
-    input(value);
+    string input;
+    char flag = 1;
+    int i; 
+    do
+    {
+        system("cls");
+        cout << "Введите " << (data_type? "double" : "unsigned int" ) << " : " << endl ;
+        cin >> input; 
+        cin.get();
+        if(!data_type && input[0] == '-' || input[0] != '-' && !isdigit(input[0])  ||  !input.compare("-0") ) // если первый знак не "-" и не цифра или сочитание символов "-0"  
+        {
+            cout << "Некорректное значение, повторите попытку ";
+            flag = 0;
+            while(cin.get() != '\n');
+            continue;
+        }
+        
+        i = 1;
+        while(input[i] != '\0')
+        {
+            if(!isdigit(input[i]) && input[i] != '.') // если не цифра и не точка
+            {
+                cout << "Некорректное значение, повторите попытку: ";
+                flag = 0;
+                while(cin.get() != '\n');
+                break;
+            }
+            else
+                flag = 1;
+            i++;
+        }
+    }while(!flag); 
+
+    stringstream ss(input);
+    ss >> value;
     queue.EnQueue(value);
     return;
 }

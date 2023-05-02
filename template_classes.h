@@ -141,41 +141,7 @@ class ListQueue
 };
 
 
-template<class T>
-T input(T &value)
-{
-    string input;
-    int i;
-    char flag;
-    do
-    {
-        system("cls");
-        cout << "Введите " << typeid(value).name() << " : " << endl ;
-        cin >> input; 
-        cin.get();
-        if(input[0] != '-' && !isdigit(input[0])  ||  !input.compare("-0") ) // если первый знак не "-" или не цифра
-        {
-            cout << "Некорректное значение, повторите попытку: ";
-            continue;
-        }
-        
-        i = 1;
-        flag = 1;
-        while(input[i] != '\0')
-        {
-            if(!isdigit(input[i]) || input[i] != '.')
-            {
-                cout << "Некорректное значение, повторите попытку: ";
-                flag = 0;
-                break;
-            }
-            else
-                flag = 1;
-            i++;
-        }
-    }while(!flag);
-    return value = stoi(input);
-}
+
 
 // считываю в строку
 // если первый знак не "-" или не цифра
