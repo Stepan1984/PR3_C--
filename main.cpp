@@ -40,17 +40,41 @@ int main(void)
                 input(u_list_queue, dtmp, 0);                
                 break;
             case 2:
-                cout << "Извлекли из dVQ: " << d_vector_queue.DeQueue() << endl;
-                cout << "Извлекли из uVQ: " << u_vector_queue.DeQueue() << endl;
-                cout << "Извлекли из dLQ: " << d_list_queue.DeQueue() << endl;
-                cout << "Извлекли из uLQ: " << u_list_queue.DeQueue() << endl;
+                if(d_vector_queue.isEmpty())
+                    cout << "Очередь dVQ пустая" << endl;
+                else
+                    cout << "Извлекли из dVQ: " << d_vector_queue.DeQueue() << endl;
+                if(u_vector_queue.isEmpty())
+                    cout << "Очередь uVQ пустая" << endl;
+                else
+                    cout << "Извлекли из uVQ: " << u_vector_queue.DeQueue() << endl;
+                if(d_list_queue.isEmpty())
+                    cout << "Очередь dLQ пустая" << endl;
+                else
+                    cout << "Извлекли из dLQ: " << d_list_queue.DeQueue() << endl;
+                if(u_list_queue.isEmpty())
+                    cout << "Очередь uLQ пустая" << endl;
+                else
+                    cout << "Извлекли из uLQ: " << u_list_queue.DeQueue() << endl;
                 while(cin.get() != '\n');
                 break;
             case 3:
-                cout << "Прочитали из dVQ: " << d_vector_queue.getHead() << endl;
-                cout << "Прочитали из uVQ: " << u_vector_queue.getHead() << endl;
-                cout << "Прочитали из dLQ: " << d_list_queue.getHead() << endl;
-                cout << "Прочитали из uLQ: " << u_list_queue.getHead() << endl;
+                if(d_vector_queue.isEmpty())
+                    cout << "Очередь dVQ пустая" << endl;
+                else
+                    cout << "Прочитали из dVQ: " << d_vector_queue.getHead() << endl;
+                if(u_vector_queue.isEmpty())
+                    cout << "Очередь uVQ пустая" << endl;
+                else
+                    cout << "Прочитали из uVQ: " << u_vector_queue.getHead() << endl;
+                if(d_list_queue.isEmpty())
+                    cout << "Очередь dLQ пустая" << endl;
+                else
+                    cout << "Прочитали из dLQ: " << d_list_queue.getHead() << endl;
+                if(u_list_queue.isEmpty())
+                    cout << "Очередь uLQ пустая" << endl;
+                else
+                    cout << "Прочитали из uLQ: " << u_list_queue.getHead() << endl;
                 while(cin.get() != '\n');
                 break;
             case 4:
@@ -73,7 +97,6 @@ int main(void)
     return 0;
 }
 
-//template<class T>
 template <class TQueue, class TData>
 void input(TQueue &queue, TData &value, bool data_type)
 {
