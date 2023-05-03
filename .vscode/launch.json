@@ -1,16 +1,35 @@
 {
   "configurations": [
     {
-      "name": "C++ Debug Runner",
+      "name": "main C++ Debug Runner",
       "type": "cppdbg",
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:\\Users\\stepa\\Desktop\\PR3_C--\\",
-      "program": "c:\\Users\\stepa\\Desktop\\PR3_C--\\main.exe",
+      "cwd": "c:\\Users\\stepa\\Desktop\\PR3_C--\\classes\\",
+      "program": "c:\\Users\\stepa\\Desktop\\PR3_C--\\classes \\main.exe",
       "MIMode": "gdb",
       "miDebuggerPath": "C:/MinGW/bin/gdb.exe",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    },
+    {
+      "name": "func_main C++ Runner",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": true,
+      "cwd": "c:/Users/stepa/Desktop/PR3_C--/func/",
+      "program": "c:/Users/stepa/Desktop/PR3_C--/func/main_func_test.exe",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
       "setupCommands": [
         {
           "description": "Enable pretty-printing for gdb",
