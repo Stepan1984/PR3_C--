@@ -8,13 +8,13 @@
 using namespace std;
 
 template <class TQueue, class TData>
-void input(TQueue &queue, TData &value, bool );
+void input(TQueue &, TData &, bool );
 
 int main(void)
 {
     setlocale(LC_ALL, "Rus");
-    ListQueue<double> d_queue;
-    ListQueue<unsigned> u_queue;
+    VectorQueue<double> d_queue;
+    VectorQueue<unsigned> u_queue;
     double dtmp;
     unsigned utmp;
 
@@ -34,21 +34,21 @@ int main(void)
         switch(menu)
         {
             case 1:
-                input(d_queue, dtmp, 1);
-                input(u_queue, utmp, 0);
+                input(d_queue, dtmp, 1); // ввод double
+                input(u_queue, utmp, 0); // ввод unsigned
                 break;
             case 2:
-                if(d_queue.isEmpty())
+                if(d_queue.isEmpty()) // если очередь с эл-ми double пуста
                     cout << "Очередь dQ пустая" << endl;
                 else
-                    cout << "Нечётный максимум в dQ: " <<  (find_odd_max(d_queue, dtmp)? to_string(dtmp) : "dboba") << endl;;
-                if(u_queue.isEmpty())
+                    cout << "Нечётный максимум в dQ: " <<  (find_odd_max(d_queue, dtmp)? to_string(dtmp) : "dboba") << endl;
+                if(u_queue.isEmpty()) // если очередь с эл-ми unsigned пуста
                     cout << "Очередь uQ пустая" << endl;
                 else
-                    cout << "Нечётный максимум в uQ: " << (find_odd_max(u_queue, utmp)? to_string(utmp) : "uboba") << endl;;
+                    cout << "Нечётный максимум в uQ: " << (find_odd_max(u_queue, utmp)? to_string(utmp) : "uboba") << endl;
                 while(cin.get() != '\n');
                 break;
-            case 4:
+            case 4: // для debug
                 cout << d_queue.getHead() << endl;
                 cout << u_queue.getHead() << endl;
                 while(cin.get() != '\n');
@@ -59,50 +59,55 @@ int main(void)
 }
 
 template <class TQueue, class TData>
-void input(TQueue &queue, TData &value, bool data_type)
+void input(TQueue &queue, TData &tmp, bool data_type)
 {
-    if(queue.isFull())
+    if(queue.isFull()) // если очередь заполнена
     {
         cout << "Очередь заполнена" << endl;
         while(cin.get() != '\n');
         return;
     }
     string input;
-    char flag = 1;
+    char flag; 
     int i; 
+    TData value;
     do
     {
+        flag = 1; // устанавливаем флаг корректности числа 
         system("cls");
         cout << "Введите " << (data_type? "double" : "unsigned int" ) << " : " << endl ;
-        cin >> input; 
+        cin >> input; // запрашиваем ввод числа 
         cin.get();
-        if(!data_type && input[0] == '-' || input[0] != '-' && !isdigit(input[0])  ||  !input.compare("-0") ) // если первый знак не "-" и не цифра или сочитание символов "-0"  
+        if(!data_type && input[0] == '-' || input[0] != '-' && !isdigit(input[0])  ||  !input.compare("-0") ) // если unsigned и первый знак "-" или первый знак не "-" и не цифра или ввели "-0"  
         {
-            cout << "Некорректное значение, повторите попытку ";
+            cout << "Некорректное значение, повторите попытку " << endl;
+            cout << "ENTER - для повторного ввода" << endl;
             flag = 0;
             while(cin.get() != '\n');
-            continue;
+            continue; // переход к следующей итерации цикла
         }
         
-        i = 1;
-        while(input[i] != '\0')
+        i = 1; // итератор прохода по строке начиная со 2 символа
+        while(input[i] != '\0') // пока не конец строки
         {
             if(!isdigit(input[i]) && input[i] != '.') // если не цифра и не точка
             {
-                cout << "Некорректное значение, повторите попытку: ";
+                cout << "Некорректное значение, повторите попытку" << endl;
+                cout << "ENTER - для повторного ввода" << endl;
                 flag = 0;
                 while(cin.get() != '\n');
-                break;
-            }
-            else
-                flag = 1;
+                break; // выходим из цикла прохода по строке
+            } 
             i++;
         }
-    }while(!flag); 
 
-    stringstream ss(input);
-    ss >> value;
-    queue.EnQueue(value);
+    }while(!flag); // пока число некорректно 
+
+    stringstream ss;
+    ss << input; // преобразуем string 
+    ss >> value; // в TData
+    queue.EnQueue(value); // добавляем элемент в очередь
+
     return;
 }
 

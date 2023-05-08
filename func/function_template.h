@@ -1,4 +1,4 @@
-#include <cmath>
+//#include <cmath>
 #include <sstream>
 
 using namespace std;
@@ -6,36 +6,37 @@ using namespace std;
 template <class TData, class TQueue>
 int find_odd_max(TQueue queue, TData &max)
 {
-    bool k = false;
+    bool k = false; // если нашли хотя бы одно нечётное число
     stringstream ss;
     TData Ttmp;
     string stmp;
     char ctmp;
-    while(!queue.isEmpty()) // поиск первого нечётного (пока не пусто)
+    while(!queue.isEmpty()) // пока очередь не пуста
     {
-        Ttmp = queue.DeQueue();
-        ss << Ttmp;
+        Ttmp = queue.DeQueue(); // достаём из очереди элемент
+        ss << Ttmp; // преобразуем его в строку
         ss >> stmp ;
-        ctmp = stmp.back();
-        if(ctmp ==  '1' || ctmp ==  '3' || ctmp ==  '5' || ctmp ==  '7' || ctmp ==  '9') // если нечётное
+        ctmp = stmp.back(); // берём последний знак числа
+        if(ctmp ==  '1' || ctmp ==  '3' || ctmp ==  '5' || ctmp ==  '7' || ctmp ==  '9') // если последний знак числа - нечётный
         {
-            max = Ttmp; // запоминаем его
-            break; // выходим из цикла
-            k = 1;
+            max = Ttmp; // запоминаем число как нечётный максимум
+            k = 1; // запоминаем, что нашли хотя бы одно нечётное число
+            break; // перываем выполнение цикла, т.к. нашли первое число
+            
         }
     }
 
-    while(!queue.isEmpty()) // пока не список не пуст
+    while(!queue.isEmpty()) // пока очередь не пуста
     {
-        Ttmp = queue.DeQueue();
-        ss << Ttmp;
-        ss >> stmp ;
-        ctmp = stmp.back();   
-        if((ctmp ==  '1' || ctmp ==  '3' || ctmp ==  '5' || ctmp ==  '7' || ctmp ==  '9') && Ttmp > max) // если нечётное и больше максимума
-            max = Ttmp; // запоминаем
+        Ttmp = queue.DeQueue(); // достаём из очереди элемент
+        ss << Ttmp; // преобразуем число в строку
+        ss >> stmp;
+        ctmp = stmp.back(); // берём последний знак числа   
+        if((ctmp ==  '1' || ctmp ==  '3' || ctmp ==  '5' || ctmp ==  '7' || ctmp ==  '9') && Ttmp > max) // если послдений знак числа - нечётный и это число больше нынешнего максимума
+            max = Ttmp; // запоминаем это число как нечётный максимум
     }
-    if(k)
-        return 1;
-    else
-        return 0;
+    if(k) // если нашли хотя бы одно число
+        return 1; // поиск успешный
+    else 
+        return 0; // не успешный поиск
 }
