@@ -87,6 +87,13 @@ class ListQueue
             head = tail = NULL;
         }
 
+        ListQueue(const ListQueue &other) // конструктор копирования
+        {
+            item * other_node = other.head;
+            while(other_node) // если копируемый стек не пуст
+                this->EnQueue(other_node->data); // добавляем элементы в новую очередь
+        }
+
 
         ~ListQueue() // деструктор
         {

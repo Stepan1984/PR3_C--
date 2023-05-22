@@ -19,6 +19,18 @@ class VectorQueue
             tail = head - 1;
         }
 
+        VectorQueue(const VectorQueue &other) // конструктор копирования
+        {
+            this->head = other.head;
+            this->tail = other.tail;
+            this->maxLength = other.maxLength;
+            this->data = new Tdata[other.maxLength]; // выделяем память под массив того же размера
+            for(int i = 0; i < maxLength; i++)
+            {
+                this->data[i] = other.data[i];
+            }
+        }
+
         ~VectorQueue() // деструктор
         {
             delete[] data;
@@ -76,15 +88,17 @@ class ListQueue
             head = tail = NULL;
         }
 
+        ListQueue(const ListQueue &other) // конструктор копирования
+        {
+            item * other_node = other.head;
+            while(other_node) // если копируемый стек не пуст
+                this->EnQueue(other_node->data); // добавляем элементы в новую очередь
+        }
+
         ~ListQueue() // деструктор
         {
-            item * temp = head;
             while(head)
-            {
-                temp = head;
-                head = head->next;
-                delete temp;
-            }
+                this->DeQueue();
         }
 
         int isEmpty() // проверка на пустоту
@@ -139,25 +153,3 @@ class ListQueue
             return temp; // возвращаем 
         }
 };
-
-
-
-
-// считываю в строку
-// если первый знак не "-" или не цифра
-//      запрашиваю повторный ввод
-// если второй знак не цифра
-//      запрашиваю повторный ввод
-
-
-// считываю в строку
-// если первый знак не "-" или не цифра
-//  запрашиваю повторный ввод
-// int i = 1;
-// пока не конец строки
-//      если string[i] не цифра
-//          Запрос повторного ввода
-//          break;
-//      i++;
-// value = stoi(input);
-// return 1;

@@ -69,7 +69,7 @@ void input(TQueue &queue, TData &tmp, bool data_type)
     }
     string input;
     char flag; 
-    int i; 
+    int i, length; 
     TData value;
     do
     {
@@ -78,6 +78,7 @@ void input(TQueue &queue, TData &tmp, bool data_type)
         cout << "Введите " << (data_type? "double" : "unsigned int" ) << " : " << endl ;
         cin >> input; // запрашиваем ввод числа 
         cin.get();
+        length = input.length();
         if(!data_type && input[0] == '-' || input[0] != '-' && !isdigit(input[0])  ||  !input.compare("-0") ) // если unsigned и первый знак "-" или первый знак не "-" и не цифра или ввели "-0"  
         {
             cout << "Некорректное значение, повторите попытку " << endl;
@@ -87,6 +88,9 @@ void input(TQueue &queue, TData &tmp, bool data_type)
             continue; // переход к следующей итерации цикла
         }
         
+        if(length == 1)
+            break;
+            
         i = 1; // итератор прохода по строке начиная со 2 символа
         while(input[i] != '\0') // пока не конец строки
         {

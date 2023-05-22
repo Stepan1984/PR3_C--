@@ -108,13 +108,14 @@ void input(TQueue &queue, TData &value, bool data_type)
     }
     string input;
     char flag = 1;
-    int i; 
+    int i, length; 
     do
     {
         system("cls");
         cout << "Введите " << (data_type? "double" : "unsigned int" ) << " : " << endl ;
         cin >> input; 
         cin.get();
+        length = input.length();
         if(!data_type && input[0] == '-' || input[0] != '-' && !isdigit(input[0])  ||  !input.compare("-0") ) // если первый знак не "-" и не цифра или сочитание символов "-0"  
         {
             cout << "Некорректное значение, повторите попытку ";
@@ -123,6 +124,8 @@ void input(TQueue &queue, TData &value, bool data_type)
             continue;
         }
         
+        if(length == 1)
+            break;
         i = 1;
         while(input[i] != '\0')
         {
